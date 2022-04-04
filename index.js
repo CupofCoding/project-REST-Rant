@@ -1,5 +1,4 @@
 
-//part 1, 2, 4, 5, 6
 //Dependencies
 require('dotenv').config();
 const express = require('express');
@@ -15,8 +14,11 @@ app.use(express.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
 
 //Controllers & Routes
+// code to import the router in'places.js'
+// .use('sets all routes after /places controller,)
 app.use('/places', require('./controllers/places'));
 
+// homepage route path
 app.get('/', (req,res) => {
     res.render('home');
 });
@@ -26,7 +28,8 @@ app.get('/', (req, res) => {
 })
 
 app.get('*', (req, res) => {
-    res.status(404).send('<h1>404 Page</h1>')
-})
+    // .status(404) linked to .send to call status response
+    res.render('error404')
+  });
 
 app.listen(process.env.PORT)
