@@ -38,3 +38,7 @@ nav a:hover {
     color: pink;
     text-decoration: none;
 }
+
+form {
+    text-align: center;
+  }
