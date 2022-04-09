@@ -27,6 +27,7 @@ router.get("/", (req, res) => {
     });
 });
 
+//Create
 outer.post("/", (req, res) => {
   db.Place.create(req.body)
     .then(() => {
@@ -49,10 +50,12 @@ outer.post("/", (req, res) => {
     });
 });
 
+//New
 router.get("/new", (req, res) => {
   res.render("places/new");
 });
 
+//show
 router.get("/:id", (req, res) => {
   db.Place.findById(req.params.id)
     .then((place) => {
@@ -68,10 +71,12 @@ router.put("/:id", (req, res) => {
   res.send("PUT /places/:id stub");
 });
 
+//delete
 router.delete("/:id", (req, res) => {
   res.send("DELETE /places/:id stub");
 });
 
+//edit
 router.get("/:id/edit", (req, res) => {
   res.send("GET edit form stub");
 });
@@ -83,5 +88,38 @@ router.post("/:id/rant", (req, res) => {
 router.delete("/:id/rant/:rantId", (req, res) => {
   res.send("GET /places/:id/rant/:rantId stub");
 });
+
+//Comments
+router.post('/:id/comment', (req, res) => {
+  console.log(req.params.id)
+  req.body.rant = req.body.rant ? true : false
+  if(req.body.author === "") {
+      req.body.author = undefined
+  }
+  if(req.body.content === ""){
+      req.body.content = undefined
+  }
+  console.log(req.body)
+  db.Place.findById(req.params.id)
+      .then(place =>  {
+          db.Comment.create(req.body)
+              .then(comment =>  {
+                  place.comments.push(comment.id)
+                  place.save()
+                      .then(() => {
+                          res.redirect(`/places/${req.params.id}`)
+                      })
+              })
+              .catch(err => {
+                  console.log('Failed push')
+                  res.render('error404')
+              })
+      })
+      .catch(err =>  {
+          console.log('Failed to create')
+          res.render('error404')
+      })
+  // res.send('POST /places/:id/comment stub')
+})
 
 module.exports = router;

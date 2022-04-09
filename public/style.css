@@ -41,4 +41,13 @@ nav a:hover {
 
 form {
     text-align: center;
-  }
+}
+
+#rant{
+    margin-left: 4em;
+}
+
+.rant-box{
+    border:1px solid #ced4da;
+    border-radius: .35em
+}

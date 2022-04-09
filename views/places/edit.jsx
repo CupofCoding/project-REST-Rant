@@ -1,10 +1,10 @@
 const React = require('react');
-const Default = require('../default');
+const Def = require('../default');
 
 function edit_form (data) {
     // console.log(data)
     return(
-        <Default>
+        <Def>
             <main>
                 <h1>Edit Place</h1>
                 <form method="POST" action={`/places/${data.id}?_method=PUT`}>
@@ -58,7 +58,7 @@ function edit_form (data) {
                     <input className="btn btn-primary" type="submit" value="Submit Changes" />
                 </form>
             </main>
-        </Default>
+        </Def>
     )
 }
 

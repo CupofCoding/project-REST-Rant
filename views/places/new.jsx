@@ -15,6 +15,10 @@ function new_form() {
             <label htmlFor="pic">Place Picture</label>
             <input className="form-control" id="pic" name="pic" />
           </div>
+          <div className="form-group col-sm-6 col-md-4 col-lg-3">
+            <label htmlFor="cuisines">Cuisines</label>
+            <input className="form-control" id="cuisines" name="cuisines" required />
+          </div>
           <div className="form-group">
             <label htmlFor="city">City</label>
             <input className="form-control" id="city" name="city" />
@@ -24,19 +28,12 @@ function new_form() {
             <input className="form-control" id="state" name="state" />
           </div>
           <div className="form-group">
-            <label htmlFor="cuisines">Cuisines</label>
-            <input
-              className="form-control"
-              id="cuisines"
-              name="cuisines"
-              required
-            />
+            <label for="founded">Founded Year</label>
+            <input type="number" className="form-control" id="founded" name="founded" value={new Date().getFullYear()}/>
           </div>
           <div className="form-group">
-            <label for="founded">Founded Year</label>
-            <input className="form-control" id="founded" name="founded" />
+            <input className="btn btn-primary" type="submit" value="Add Place" />
           </div>
-          <input className="btn btn-primary" type="submit" value="Add Place" />
         </form>
       </main>
     </Def>
