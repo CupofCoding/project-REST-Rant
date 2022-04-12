@@ -1,4 +1,5 @@
 const { route } = require('express/lib/application');
+const comments = require("../models/comment.js")
 
 // Add code to create and export an express.Route()
 const router = require('express').Router();
@@ -67,14 +68,32 @@ router.get("/:id", (req, res) => {
     });
 });
 
-router.put("/:id", (req, res) => {
-  res.send("PUT /places/:id stub");
-});
+//update
+router.put('/:id', (req,res) => {
+  console.log(req.body)
+  if(req.body.pic === ""){
+      req.body.pic = undefined;
+  }
+  if(req.body.city === ""){
+      req.body.city = undefined;
+  }
+  if(req.body.state === ""){
+      req.body.state = undefined;
+  }
+  console.log(req.body)
+  db.Place.findByIdAndUpdate(req.params.id, req.body, {new: true})
+      .then(updatedPlace => {
+          res.redirect(`/places/${req.params.id}`)
+      })
+})
 
 //delete
-router.delete("/:id", (req, res) => {
-  res.send("DELETE /places/:id stub");
-});
+router.delete('/:id', (req, res) => {
+  db.Place.findByIdAndDelete(req.params.id)
+   .then(deleteBread => {
+       res.status(303).redirect('/places')
+   })
+})
 
 //edit
 router.get("/:id/edit", (req, res) => {

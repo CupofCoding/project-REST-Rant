@@ -51,3 +51,19 @@ form {
     border:1px solid #ced4da;
     border-radius: .35em
 }
+
+.rant-post-box{
+    padding-top: 2em;
+}
+
+.show-box {
+    padding-bottom: 2em;
+}
+
+.comment-box{
+    padding-bottom: 2em
+}
+
+.home-pic{
+    width: 100%;
+}
