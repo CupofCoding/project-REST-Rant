@@ -1,13 +1,13 @@
 const React = require('react');
 const Def = require('../default');
 
-function edit_form (data) {
+function edit_form({ place }) {
     // console.log(data)
     return(
         <Def>
             <main>
                 <h1>Edit Place</h1>
-                <form method="POST" action={`/places/${data.id}?_method=PUT`}>
+                <form method="POST" action={`/places/${place.id}?_method=PUT`}>
                     <div className="row">
                         <div className="form-group col-sm-6">
                             <label htmlFor="name">Place Name</label>
@@ -15,7 +15,7 @@ function edit_form (data) {
                                 className="form-control" 
                                 id="name" 
                                 name="name" 
-                                value={data.place.name}
+                                value={place.name}
                                 required 
                             />
                         </div>
@@ -25,6 +25,7 @@ function edit_form (data) {
                                 className="form-control" 
                                 id="pic" 
                                 name="pic" 
+                                value={place.pic}
                             />
                         </div>
                     </div>
@@ -34,7 +35,8 @@ function edit_form (data) {
                             <input 
                                 className="form-control" 
                                 id="city" 
-                                name="city" 
+                                name="city"
+                                value={place.city}
                             />
                         </div>
                         <div className="form-group col-sm-6">
@@ -42,7 +44,18 @@ function edit_form (data) {
                             <input 
                                 className="form-control" 
                                 id="state" 
-                                name="state" 
+                                name="state"
+                                value={place.state}
+                            />
+                        </div>
+                        <div className="form-group col-sm-6 col-md-4 col-lg-3">
+                            <label htmlFor="founded">Founded</label>
+                            <input
+                            type="number"
+                            className="form-control"
+                            id="founded"
+                            name="founded"
+                            value={place.founded}
                             />
                         </div>
                     </div>
@@ -51,8 +64,9 @@ function edit_form (data) {
                         <input 
                             className="form-control" 
                             id="cuisines" 
-                            name="cuisines" 
-                            // required 
+                            name="cuisines"
+                            required
+                            value={place.cusines}
                         />
                     </div>
                     <input className="btn btn-primary" type="submit" value="Submit Changes" />
@@ -62,4 +76,4 @@ function edit_form (data) {
     )
 }
 
-module.exports = edit_form
+module.exports = edit_form;

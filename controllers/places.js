@@ -29,7 +29,7 @@ router.get("/", (req, res) => {
 });
 
 //Create
-outer.post("/", (req, res) => {
+router.post("/", (req, res) => {
   db.Place.create(req.body)
     .then(() => {
       res.redirect("/places");
@@ -88,16 +88,26 @@ router.put('/:id', (req,res) => {
 })
 
 //delete
-router.delete('/:id', (req, res) => {
+router.delete("/:id", (req, res) => {
   db.Place.findByIdAndDelete(req.params.id)
-   .then(deleteBread => {
-       res.status(303).redirect('/places')
-   })
-})
+    .then((place) => {
+      res.redirect("/places");
+    })
+    .catch((err) => {
+      console.log("err", err);
+      res.render("error404");
+    });
+});
 
 //edit
 router.get("/:id/edit", (req, res) => {
-  res.send("GET edit form stub");
+  db.Place.findById(req.params.id)
+    .then((place) => {
+      res.render("places/edit", { place });
+    })
+    .catch((err) => {
+      res.render("error404");
+    });
 });
 
 router.post("/:id/rant", (req, res) => {

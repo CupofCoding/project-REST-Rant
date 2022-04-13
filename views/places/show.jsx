@@ -2,25 +2,36 @@ const React = require("react");
 const comment = require('../../models/comment')
 const Def = require("../default");
 
-function show ({place}) {
-  let comments = (
-      <h3 className='inactive'>
-          No Comments yet!
-      </h3>
-  )
+function show (data) {
+  let comments = <h3 className='inactive'>No Comments yet!</h3>
+  let rating = <h3 className="inactive">Not yet rated</h3>;
+
   if (place.comments.length) {
-      comments = place.comments.map(comment => {
-        return (
-        <div className="col-sm-12 rant-box">
-          <h2 className="rant">{comment.rant ? "Rant!" : "Rave"}</h2>
+    let sumRatings = place.comments.reduce((total, comment) => {
+      return total + comment.stars;
+    }, 0);
+
+    let averageRating = Math.round(sumRatings / place.comments.length);
+    let stars = "";
+    for (let i = 0; i < averageRating; i++) {
+      stars += "⭐️";
+    }
+    rating = <h3>{stars} stars</h3>;
+
+    comments = place.comments.map((comment) => {
+      return (
+        <div className="col-sm-4 rant-box">
+          <h2 className="rant">{comment.rant ? "Rant!" : "Rave!"}</h2>
           <h4>{comment.content}</h4>
-          <h3><stong>- {comment.author}</stong></h3>
+          <h3>
+            <stong>- {comment.author}</stong>
+          </h3>
           <h4>Rating: {comment.stars}</h4>
         </div>
-        )
-      })
-    }
-    return (
+      );
+    });
+  }
+  return (
     <Def>
       <main>
         <div className="row">

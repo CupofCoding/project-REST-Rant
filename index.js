@@ -23,9 +23,9 @@ app.get('/', (req,res) => {
     res.render('home');
 });
 
-app.get('/', (req, res) => {
-    res.send('Hello world!')
-})
+// app.get('/', (req, res) => {
+//     res.send('Hello world!')
+// })
 
 app.get('*', (req, res) => {
     // .status(404) linked to .send to call status response
